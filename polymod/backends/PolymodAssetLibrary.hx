@@ -249,7 +249,7 @@ class PolymodAssetLibrary
 		{
 			if (items.indexOf(id) != -1)
 				continue;
-			if (id.indexOf('_append') == 0 || id.indexOf('_merge') == 0)
+			if (Util.isMergeOrAppend(id))
 				continue;
 			if (type == null || type == BYTES || check(id, type))
 			{
@@ -501,6 +501,14 @@ class PolymodAssetLibrary
 			ext = ext.toLowerCase();
 			var assetType = getExtensionType(ext);
 			type.set(f, assetType);
+
+			var kruePath:String = f;
+			for (folder in [PolymodConfig.mergeFolder, PolymodConfig.appendFolder])
+			{
+				if (Util.uIndexOf(f, '$folder/') == 0) { kruePath = Util.uSubstring(f, folder.length + 1); break; }
+			}
+			var libi = Util.uIndexOf(kruePath, '/');
+			var lib:String = libi != -1 ? Util.uSubstring(kruePath, 0, libi) : '';
 
 			var libi = Util.uIndexOf(f, "/");
 			var lib:String = libi != -1 ? f.substring(0, libi + 1) : '';
