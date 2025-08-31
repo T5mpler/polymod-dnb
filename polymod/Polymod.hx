@@ -670,6 +670,9 @@ class Polymod
 	 */
 	public static function registerAllScriptClasses():Void
 	{
+		// Clear scripts.
+		clearScripts();
+
 		#if hscript
 		@:privateAccess {
 			// Go through each script and parse any classes in them.
@@ -715,6 +718,9 @@ class Polymod
 	 */
 	public static function registerAllScriptClassesAsync():Array<lime.app.Future<Bool>>
 	{
+		// Clear scripts.
+		clearScripts();
+		
 		#if hscript
 		// Go through each script and parse any classes in them.
 		var potentialScripts:Array<String> = Polymod.assetLibrary.list(TEXT);
