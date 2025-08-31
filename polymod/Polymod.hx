@@ -670,9 +670,6 @@ class Polymod
 	 */
 	public static function registerAllScriptClasses():Void
 	{
-		// Clear scripts.
-		clearScripts();
-
 		#if hscript
 		@:privateAccess {
 			// Go through each script and parse any classes in them.
