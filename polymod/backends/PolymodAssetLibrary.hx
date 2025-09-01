@@ -509,9 +509,6 @@ class PolymodAssetLibrary
 			}
 			var libi = Util.uIndexOf(kruePath, '/');
 			var lib:String = libi != -1 ? Util.uSubstring(kruePath, 0, libi) : '';
-
-			var libi = Util.uIndexOf(f, "/");
-			var lib:String = libi != -1 ? f.substring(0, libi + 1) : '';
 			if (lib != '')
 			{
 				var added = false;
