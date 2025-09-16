@@ -564,8 +564,6 @@ class PolymodScriptClass
 		}
 	}
 
-	static final previousValues:Map<String, Dynamic> = [];
-
 	@:privateAccess(hscript.Interp)
 	public function callFunction(fnName:String, args:Array<Dynamic> = null):Dynamic
 	{
@@ -575,7 +573,7 @@ class PolymodScriptClass
 		if (fn != null)
 		{
 			// previousValues is used to restore variables after they are shadowed in the local scope.
-			previousValues.clear();
+			var previousValues:Map<String, Dynamic> = [];
 			var i = 0;
 			for (a in fn.args)
 			{
@@ -687,7 +685,7 @@ class PolymodScriptClass
 		var name = "";
 		if (_c.pkg != null && _c.pkg.length > 0)
 		{
-			name += _c.pkg?.join(".") ?? '' + ".";
+			name += (_c.pkg?.join(".") ?? '') + ".";
 		}
 		name += _c.name;
 		return name;
