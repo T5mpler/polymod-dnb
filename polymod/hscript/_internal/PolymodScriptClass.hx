@@ -479,12 +479,15 @@ class PolymodScriptClass
 	public static function reportError(err:hscript.Expr.Error, className:String = null, fnName:String = null)
 	{
 		var errEx = PolymodExprEx.ErrorExUtil.toErrorEx(err);
-		reportErrorEx(errEx, fnName);
+		reportErrorEx(errEx, className, fnName);
 	}
 
 	public static function reportErrorEx(err:PolymodExprEx.ErrorEx, className:String = null, fnName:String = null):Void
 	{
 		var errLine:String = #if hscriptPos '${err.line}' #else "#???" #end;
+
+		className ??= '???';
+		fnName ??= 'anonymous';
 
 		#if hscriptPos
 		switch (err.e)
@@ -599,6 +602,9 @@ class PolymodScriptClass
 
 			// Polymod.debug('Calling scripted class function "${fullyQualifiedName}.${fnName}(${args})"', null);
 
+			// Copy the locals and store them for later.
+			var localsCopy:Map<String, {r:Dynamic, ?isfinal:Null<Bool>}> = _interp.locals.copy();
+
 			var r:Dynamic = null;
 			try
 			{
@@ -631,6 +637,9 @@ class PolymodScriptClass
 					_interp.variables.remove(a.name);
 				}
 			}
+
+			// Restore the locals.
+			_interp.locals = localsCopy;
 
 			return r;
 		}

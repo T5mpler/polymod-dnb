@@ -44,6 +44,11 @@ class Util
 		return uIndexOf(id, PolymodConfig.mergeFolder) == 0 || uIndexOf(id, PolymodConfig.appendFolder) == 0;
 	}
 
+	public static inline function isMergeOrAppend(id:String):Bool
+	{
+		return uIndexOf(id, PolymodConfig.mergeFolder) == 0 || uIndexOf(id, PolymodConfig.appendFolder) == 0;
+	}
+
 	public static function mergeAndAppendText(baseText:String, id:String, dirs:Array<String>, getModText:String->String->String, fileSystem:IFileSystem,
 			parseRules:ParseRules = null):String
 	{
@@ -508,7 +513,7 @@ class Util
 		return extension;
 	}
 
-	public static function uIndexOf(str:String, substr:String, ?startIndex:Int):Int
+	public static inline function uIndexOf(str:String, substr:String, ?startIndex:Int):Int
 	{
 		#if unifill
 		return Unifill.uIndexOf(str, substr, startIndex);
@@ -691,7 +696,7 @@ class Util
         return -1;
     }
 
-    public inline static function containsInsens(arr:Array<String>, x:String, ignoreConfig:Bool = false):Bool
+    public static inline function containsInsens(arr:Array<String>, x:String, ignoreConfig:Bool = false):Bool
     {
         return indexOfInsens(arr, x, ignoreConfig) != -1;
     }
