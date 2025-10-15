@@ -44,11 +44,6 @@ class Util
 		return uIndexOf(id, PolymodConfig.mergeFolder) == 0 || uIndexOf(id, PolymodConfig.appendFolder) == 0;
 	}
 
-	public static inline function isMergeOrAppend(id:String):Bool
-	{
-		return uIndexOf(id, PolymodConfig.mergeFolder) == 0 || uIndexOf(id, PolymodConfig.appendFolder) == 0;
-	}
-
 	public static function mergeAndAppendText(baseText:String, id:String, dirs:Array<String>, getModText:String->String->String, fileSystem:IFileSystem,
 			parseRules:ParseRules = null):String
 	{
